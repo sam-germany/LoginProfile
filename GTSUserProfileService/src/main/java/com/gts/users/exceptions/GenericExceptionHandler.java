@@ -1,4 +1,4 @@
-package com.gst.users.exceptions;
+package com.gts.users.exceptions;
 
 import java.util.Date;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import com.gst.users.model.response.ErrorMessage;
+import com.gts.users.model.response.ErrorMessage;
 
 @ControllerAdvice
 public class GenericExceptionHandler {

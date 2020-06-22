@@ -1,4 +1,4 @@
-package com.gst.users.model.response;
+package com.gts.users.model.response;
 
 public class OperationsStatusModel {
 

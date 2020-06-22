@@ -1,4 +1,4 @@
-package com.gst.users.exceptions;
+package com.gts.users.exceptions;
 
 public class UserServiceException extends RuntimeException{
 

@@ -1,4 +1,4 @@
-package com.gst.users.shared.dto;
+package com.gts.users.shared.dto;
 
 import java.io.Serializable;
 

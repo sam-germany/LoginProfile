@@ -1,4 +1,4 @@
-package com.gst.users.controllers;
+package com.gts.users.controllers;
 
 
 import java.util.ArrayList;
@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.gst.users.model.request.UserDetailsRequestModel;
-import com.gst.users.model.response.OperationsStatusModel;
-import com.gst.users.model.response.RequestOperationName;
-import com.gst.users.model.response.RequestOperationStatus;
-import com.gst.users.model.response.UserRest;
-import com.gst.users.services.UserService;
-import com.gst.users.shared.dto.UserDto;
+import com.gts.users.model.request.UserDetailsRequestModel;
+import com.gts.users.model.response.OperationsStatusModel;
+import com.gts.users.model.response.RequestOperationName;
+import com.gts.users.model.response.RequestOperationStatus;
+import com.gts.users.model.response.UserRest;
+import com.gts.users.services.UserService;
+import com.gts.users.shared.dto.UserDto;
 
 @RestController
 @RequestMapping("users")

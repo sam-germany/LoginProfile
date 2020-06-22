@@ -1,11 +1,11 @@
-package com.gst.users.repositories;
+package com.gts.users.repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.gst.users.entities.UserEntity;
+import com.gts.users.entities.UserEntity;
 
 
 @Repository

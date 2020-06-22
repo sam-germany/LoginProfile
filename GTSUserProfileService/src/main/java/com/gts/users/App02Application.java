@@ -1,4 +1,4 @@
-package com.gst.users;
+package com.gts.users;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

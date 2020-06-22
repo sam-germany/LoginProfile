@@ -1,11 +1,13 @@
-package com.gst.users.services;
+package com.gts.users.services;
 
 
 import java.util.List;
 
-import com.gst.users.shared.dto.UserDto;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService {
+import com.gts.users.shared.dto.UserDto;
+
+public interface UserService extends UserDetailsService {
 
 	
     UserDto createUser(UserDto userDto);

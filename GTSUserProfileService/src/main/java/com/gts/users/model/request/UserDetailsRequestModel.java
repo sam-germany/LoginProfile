@@ -1,4 +1,4 @@
-package com.gst.users.model.request;
+package com.gts.users.model.request;
 
 public class UserDetailsRequestModel {
 

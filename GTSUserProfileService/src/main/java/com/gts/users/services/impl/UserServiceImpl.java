@@ -1,4 +1,4 @@
-package com.gst.users.services.impl;
+package com.gts.users.services.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,15 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.gst.users.entities.UserEntity;
-import com.gst.users.exceptions.UserServiceException;
-import com.gst.users.model.response.ErrorMessageEnum;
-import com.gst.users.repositories.UserRepository;
-import com.gst.users.services.UserService;
-import com.gst.users.shared.dto.UserDto;
+import com.gts.users.entities.UserEntity;
+import com.gts.users.exceptions.UserServiceException;
+import com.gts.users.model.response.ErrorMessageEnum;
+import com.gts.users.repositories.UserRepository;
+import com.gts.users.services.UserService;
+import com.gts.users.shared.dto.UserDto;
 
 
 @Service
@@ -27,6 +29,13 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	BCryptPasswordEncoder  bCryptPasswordEncoder;
+	
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return null;
+	}
+	
 	
 	
 	@Override
@@ -119,4 +128,6 @@ public class UserServiceImpl implements UserService {
 			
 			return returnValue;
 		}
+
+
 }
