@@ -113,7 +113,9 @@ public class UserServiceImpl implements UserService {
 	    	userEntity.setEncryptedpassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 	    	
 	    	UserEntity updatedUser = uRepo.save(userEntity);
-	    	BeanUtils.copyProperties(updatedUser, returnValue);
+	    	
+	    	ModelMapper modelMapper = new ModelMapper();
+	    	returnValue = modelMapper.map(updatedUser, UserDto.class);
 		
 		return returnValue;
 	}
