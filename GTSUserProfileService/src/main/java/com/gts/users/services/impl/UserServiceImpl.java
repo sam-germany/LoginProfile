@@ -3,6 +3,7 @@ package com.gts.users.services.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,8 @@ import com.gts.users.model.response.ErrorMessageEnum;
 import com.gts.users.repositories.UserRepository;
 import com.gts.users.services.UserService;
 import com.gts.users.shared.dto.UserDto;
+
+import ch.qos.logback.core.joran.util.beans.BeanUtil;
 
 
 @Service
@@ -45,6 +48,21 @@ public class UserServiceImpl implements UserService {
 		return new User(userEntity.getEmail() , userEntity.getEncryptedpassword(), new ArrayList<>());
 	}
 	
+
+	@Override
+	public UserDto getUserByEmail(String email) {
+
+		UserEntity userEntity = uRepo.findByEmail(email);
+		
+		if(userEntity == null) 
+			    throw new UserServiceException(ErrorMessageEnum.NO_RECORD_FOUND.getErrorMessageEnum());
+		
+		UserDto returnValue = new UserDto();
+		BeanUtils.copyProperties(userEntity, returnValue);
+		
+		return returnValue;
+	}
+	
 	
 	
 	@Override
@@ -52,17 +70,15 @@ public class UserServiceImpl implements UserService {
 
 		if(uRepo.findByEmail(userDto.getEmail())  != null) 
 			     throw new UserServiceException(ErrorMessageEnum.NO_RECORD_FOUND.getErrorMessageEnum());
-		
-		  UserEntity userEntity = new UserEntity();
-       	  BeanUtils.copyProperties(userDto, userEntity);
 
+		 ModelMapper modelMapper = new ModelMapper();
+		 UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
        	  
       	    userEntity.setEncryptedpassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 
   	     	UserEntity  storedUserDetails = uRepo.save(userEntity);
 
-    		UserDto  returnValue = new UserDto();
-       	    BeanUtils.copyProperties(storedUserDetails, returnValue);
+    		UserDto  returnValue = modelMapper.map(storedUserDetails, UserDto.class);
 
 	return returnValue;
 	}
@@ -136,6 +152,9 @@ public class UserServiceImpl implements UserService {
 			
 			return returnValue;
 		}
+
+
+
 
 
 }

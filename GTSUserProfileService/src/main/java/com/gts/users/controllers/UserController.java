@@ -4,6 +4,7 @@ package com.gts.users.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,16 +32,19 @@ public class UserController {
 	  @Autowired
 	  private UserService uService;
 	
-	   @PostMapping("/create")
+	   @PostMapping(path = "/create")
        public UserRest  createUser(@RequestBody  UserDetailsRequestModel userDetails ) throws Exception {
 		
 		    UserRest  returnValue = new UserRest();
 		
-		    UserDto userDto = new UserDto();
-	     	BeanUtils.copyProperties(userDetails, userDto);
+		//    UserDto userDto = new UserDto();
+	    // 	BeanUtils.copyProperties(userDetails, userDto);
 		
+		    ModelMapper modelMapper = new ModelMapper();
+	     	UserDto userDto = modelMapper.map(userDetails, UserDto.class);
+	     	
 		    UserDto createdUser = uService.createUser(userDto);
-		    BeanUtils.copyProperties(createdUser, returnValue);
+		    returnValue = modelMapper.map(createdUser, UserRest.class);
 		
 		    return returnValue;
 	    }
