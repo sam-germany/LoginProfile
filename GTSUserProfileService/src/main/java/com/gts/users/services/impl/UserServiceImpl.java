@@ -92,9 +92,10 @@ public class UserServiceImpl implements UserService {
              
              if( userEntity == null) 
 			     throw new UserServiceException(ErrorMessageEnum.NO_RECORD_FOUND.getErrorMessageEnum());
+           
+             ModelMapper modelMapper = new ModelMapper();
+             returnValue = modelMapper.map(userEntity, UserDto.class);
              
-             BeanUtils.copyProperties(userEntity, returnValue);
-               
 		   return returnValue;
 	   }
 

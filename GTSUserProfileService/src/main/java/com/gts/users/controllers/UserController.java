@@ -37,9 +37,6 @@ public class UserController {
 		
 		    UserRest  returnValue = new UserRest();
 		
-		//    UserDto userDto = new UserDto();
-	    // 	BeanUtils.copyProperties(userDetails, userDto);
-		
 		    ModelMapper modelMapper = new ModelMapper();
 	     	UserDto userDto = modelMapper.map(userDetails, UserDto.class);
 	     	
@@ -51,10 +48,13 @@ public class UserController {
 	
 	   @GetMapping(path = "/getUser/{id}")
 	   public UserRest getUser(@PathVariable long id) {
+		   
 		   UserRest returnValue = new UserRest();
+		   ModelMapper modelMapper = new ModelMapper();
 		   
 		   UserDto userDto = uService.getUserByid(id);
-		   BeanUtils.copyProperties(userDto, returnValue);
+           returnValue = modelMapper.map(userDto, UserRest.class);
+		   
 		   
 		   return returnValue;
 	   }
@@ -66,6 +66,8 @@ public class UserController {
 		   
 		   UserDto userDto = new UserDto();
 		   BeanUtils.copyProperties(userDetails, userDto);
+		   
+		   
 		   
 		   UserDto updatedUser = uService.updateUser(id, userDto);
 		   BeanUtils.copyProperties(updatedUser, returnValue);
