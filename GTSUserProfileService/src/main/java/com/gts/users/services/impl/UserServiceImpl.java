@@ -57,8 +57,7 @@ public class UserServiceImpl implements UserService {
 		if(userEntity == null) 
 			    throw new UserServiceException(ErrorMessageEnum.NO_RECORD_FOUND.getErrorMessageEnum());
 		
-		UserDto returnValue = new UserDto();
-		BeanUtils.copyProperties(userEntity, returnValue);
+	     UserDto returnValue = new ModelMapper().map(userEntity, UserDto.class);
 		
 		return returnValue;
 	}
