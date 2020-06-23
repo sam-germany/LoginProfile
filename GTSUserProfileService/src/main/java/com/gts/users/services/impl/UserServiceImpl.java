@@ -137,6 +137,8 @@ public class UserServiceImpl implements UserService {
 		public List<UserDto> getAllUsers(int page, int limit) {
 
 			 List<UserDto> returnValue = new ArrayList<>();
+			 ModelMapper modelMapper  = new ModelMapper();
+			 
 			 if(page > 0) page -=1;      
                                      
                          
@@ -144,12 +146,10 @@ public class UserServiceImpl implements UserService {
 			
 			 Page<UserEntity> usersPage = uRepo.findAll(pageableRequest);
 			 List<UserEntity> users = usersPage.getContent();
-			 
+			
 			 
 			 for(UserEntity userEntity : users) {
-				 UserDto userDto = new UserDto();
-				 BeanUtils.copyProperties(userEntity, userDto);
-				 returnValue.add(userDto);
+                 returnValue.add(modelMapper.map(userEntity, UserDto.class));
 			 }
 			 
 			

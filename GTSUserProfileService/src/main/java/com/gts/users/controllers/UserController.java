@@ -92,13 +92,12 @@ public class UserController {
 			                             @RequestParam(value = "limit" , defaultValue = "25") int limit) {
 		   
 		   List<UserRest> returnValue = new ArrayList<>();
+		   ModelMapper modelMapper = new ModelMapper();
 		   
 		   List<UserDto> allUsers = uService.getAllUsers(page, limit);
 		   
 		   for(UserDto userDto : allUsers ) {
-			   UserRest userModel = new UserRest();
-			   BeanUtils.copyProperties(userDto, userModel);
-			   returnValue.add(userModel);
+			   returnValue.add(modelMapper.map(userDto, UserRest.class));
 		   }
 		   
 		   return returnValue;
