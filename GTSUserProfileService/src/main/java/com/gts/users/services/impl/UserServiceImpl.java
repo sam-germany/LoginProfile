@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -33,7 +34,15 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return null;
+		
+		  UserEntity userEntity = uRepo.findByEmail(username);
+		  if(userEntity == null) 
+			     throw new UserServiceException(ErrorMessageEnum.NO_RECORD_FOUND.getErrorMessageEnum());
+		  
+		  if(!userEntity.getIsactive())
+			    throw new UserServiceException(ErrorMessageEnum.USER_IS_NOT_ACTIVATED.getErrorMessageEnum());
+		  
+		return new User(userEntity.getEmail() , userEntity.getEncryptedpassword(), new ArrayList<>());
 	}
 	
 	
@@ -109,10 +118,9 @@ public class UserServiceImpl implements UserService {
 		public List<UserDto> getAllUsers(int page, int limit) {
 
 			 List<UserDto> returnValue = new ArrayList<>();
-			 if(page > 0) page -=1;      // means   if(page > 0) page =  page -1;    this we put because page starts
-                                         // normally from 0,1,2....  but  0_th   reading page starts from zero is not
-                                         // so common, so i put the logic that the user put PAGE Nr = 1   and we read 
-                                          // internally  the o_th page
+			 if(page > 0) page -=1;      
+                                     
+                         
 			 Pageable pageableRequest   = PageRequest.of(page, limit);
 			
 			 Page<UserEntity> usersPage = uRepo.findAll(pageableRequest);
