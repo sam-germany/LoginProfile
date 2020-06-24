@@ -7,6 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.gts.users.security.AppProperties;
 
+import springfox.documentation.spring.web.plugins.Docket;
+
+
 @SpringBootApplication
 public class App02Application {
 
@@ -30,4 +33,5 @@ public class App02Application {
     {
     	return new AppProperties();
     }
+    
 }
