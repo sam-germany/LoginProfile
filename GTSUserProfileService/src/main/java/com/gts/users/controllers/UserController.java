@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +35,7 @@ public class UserController {
 	  @Autowired
 	  private UserService uService;
 	
-	   @PostMapping(path = "/create")
+	   @PostMapping(path = "/create"  , produces = { MediaType.APPLICATION_JSON_VALUE })
        public UserRest  createUser(@RequestBody  UserDetailsRequestModel userDetails ) throws Exception {
 		
 		    UserRest  returnValue = new UserRest();
@@ -51,7 +52,7 @@ public class UserController {
 	   @ApiImplicitParams({
 		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
 	   })
-	   @GetMapping(path = "/getUser/{id}")
+	   @GetMapping(path = "/getUser/{id}" ,produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public UserRest getUser(@PathVariable long id) {
 		   
 		   UserRest returnValue = new UserRest();
@@ -68,7 +69,7 @@ public class UserController {
 	   @ApiImplicitParams({
 		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
 	   })
-	   @PutMapping(path = "/update/{id}")
+	   @PutMapping(path = "/update/{id}"  , produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public UserRest updateUser(@PathVariable long id , @RequestBody  UserDetailsRequestModel userDetails ) {
 		   
 		   UserRest returnValue = new UserRest();
@@ -87,7 +88,7 @@ public class UserController {
 	   @ApiImplicitParams({
 		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
 	   })
-	   @DeleteMapping(path = "/delete/{id}")
+	   @DeleteMapping(path = "/delete/{id}"  , produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public OperationsStatusModel deleteUser(@PathVariable  long id) {
 		   
 		   OperationsStatusModel returnValue = new OperationsStatusModel();
@@ -104,7 +105,7 @@ public class UserController {
 	   @ApiImplicitParams({
 		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
 	   })
-	   @GetMapping(path = "/getAll")
+	   @GetMapping(path = "/getAll"  ,produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public List<UserRest> getAllUsers(@RequestParam(value = "page" , defaultValue = "0") int page,
 			                             @RequestParam(value = "limit" , defaultValue = "25") int limit) {
 		   
