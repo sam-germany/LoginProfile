@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +23,9 @@ import com.gts.users.model.response.RequestOperationStatus;
 import com.gts.users.model.response.UserRest;
 import com.gts.users.services.UserService;
 import com.gts.users.shared.dto.UserDto;
+
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 
 @RestController
 @RequestMapping("users")
@@ -45,7 +47,10 @@ public class UserController {
 		
 		    return returnValue;
 	    }
-	
+	   
+	   @ApiImplicitParams({
+		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
+	   })
 	   @GetMapping(path = "/getUser/{id}")
 	   public UserRest getUser(@PathVariable long id) {
 		   
@@ -58,7 +63,11 @@ public class UserController {
 		   
 		   return returnValue;
 	   }
-	
+	   
+	   
+	   @ApiImplicitParams({
+		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
+	   })
 	   @PutMapping(path = "/update/{id}")
 	   public UserRest updateUser(@PathVariable long id , @RequestBody  UserDetailsRequestModel userDetails ) {
 		   
@@ -74,6 +83,10 @@ public class UserController {
 		   
 	   }
 	   
+	   
+	   @ApiImplicitParams({
+		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
+	   })
 	   @DeleteMapping(path = "/delete/{id}")
 	   public OperationsStatusModel deleteUser(@PathVariable  long id) {
 		   
@@ -87,6 +100,10 @@ public class UserController {
 		   return returnValue;
 	   }
 	   
+	   
+	   @ApiImplicitParams({
+		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
+	   })
 	   @GetMapping(path = "/getAll")
 	   public List<UserRest> getAllUsers(@RequestParam(value = "page" , defaultValue = "0") int page,
 			                             @RequestParam(value = "limit" , defaultValue = "25") int limit) {
