@@ -27,6 +27,7 @@ import com.gts.users.shared.dto.UserDto;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("users")
@@ -35,6 +36,8 @@ public class UserController {
 	  @Autowired
 	  private UserService uService;
 	
+	   @ApiOperation(value="Create User Web Service Endpoint",
+			         notes="${userController.createUser.notes}")
 	   @PostMapping(path = "/create"  , produces = { MediaType.APPLICATION_JSON_VALUE })
        public UserRest  createUser(@RequestBody  UserDetailsRequestModel userDetails ) throws Exception {
 		
@@ -50,7 +53,7 @@ public class UserController {
 	    }
 	   
 	   @ApiImplicitParams({
-		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
+		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.auth-description}" , paramType = "header")
 	   })
 	   @GetMapping(path = "/getUser/{id}" ,produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public UserRest getUser(@PathVariable long id) {
@@ -67,7 +70,7 @@ public class UserController {
 	   
 	   
 	   @ApiImplicitParams({
-		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
+		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.auth-description}" , paramType = "header")
 	   })
 	   @PutMapping(path = "/update/{id}"  , produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public UserRest updateUser(@PathVariable long id , @RequestBody  UserDetailsRequestModel userDetails ) {
@@ -86,7 +89,7 @@ public class UserController {
 	   
 	   
 	   @ApiImplicitParams({
-		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
+		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.auth-description}" , paramType = "header")
 	   })
 	   @DeleteMapping(path = "/delete/{id}"  , produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public OperationsStatusModel deleteUser(@PathVariable  long id) {
@@ -102,8 +105,8 @@ public class UserController {
 	   }
 	   
 	   
-	   @ApiImplicitParams({
-		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.description}" , paramType = "header")
+	   @ApiImplicitParams({                               // ${from properties file defined value}
+		   @ApiImplicitParam(name="authorization" , value="${userController.swagger-ui.auth-description}" , paramType = "header")
 	   })
 	   @GetMapping(path = "/getAll"  ,produces = { MediaType.APPLICATION_JSON_VALUE })
 	   public List<UserRest> getAllUsers(@RequestParam(value = "page" , defaultValue = "0") int page,
